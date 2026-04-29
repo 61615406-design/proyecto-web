@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mi - Maricielo Carbajal Jimenez</title>
+     <<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sobremi.css">
+    
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Panel de botones de control (NUEVAS FUNCIONALIDADES) -->
+        <div class="panel-botones">
+            <button class="btn-control" id="btnCambiarColor">🎨 Cambiar Fondo</button>
+            <button class="btn-control" id="btnModoOscuro">🌙 Modo Oscuro</button>
+            <button class="btn-control" id="btnMostrarMensaje">💬 Mostrar Mensaje</button>
+            <button class="btn-control" id="btnOcultarSecciones">👁️ Ocultar Pasatiempos</button>
+        </div>
+
+        <!-- Navegación -->
+        <div class="nav-bg">
+            <div class="navegacion-principal">
+                <a href="Inicio.html">🏠 Inicio</a>
+                <a href="SobreMi.html" class="activo">👤 Sobre Mí</a>
+                <a href="Clientes.html">📋 Clientes</a>
+                <a href="Contacto.html">✉️ Contacto</a>
+            </div>
+        </div>
+
+        <!-- Perfil -->
+        <div class="perfil">
+            <div class="foto-perfil"></div>
+            <h1 class="nombre">Maricielo Carbajal Jimenez</h1>
+            <p class="descripcion">
+                ✨ Desarrolladora web freelance apasionada por crear experiencias digitales únicas. 
+                Transformo ideas en páginas web modernas, funcionales y llenas de estilo.
+            </p>
+        </div>
+
+        <!-- Datos Personales -->
+        <div class="tarjeta" id="datosPersonales">
+            <h2>📋 Datos Personales</h2>
+            <div class="grid-datos">
+                <div class="item-dato">
+                    <div class="icono-dato">🎂</div>
+                    <div><strong>Edad</strong><span>20 años</span></div>
+                </div>
+                <div class="item-dato">
+                    <div class="icono-dato">📍</div>
+                    <div><strong>Ciudad</strong><span>Pasco, Perú</span></div>
+                </div>
+                <div class="item-dato">
+                    <div class="icono-dato">🌎</div>
+                    <div><strong>País</strong><span>Perú</span></div>
+                </div>
+                <div class="item-dato">
+                    <div class="icono-dato">💼</div>
+                    <div><strong>Profesión</strong><span>Desarrolladora Web</span></div>
+                </div>
+                <div class="item-dato">
+                    <div class="icono-dato">🎓</div>
+                    <div><strong>Especialidad</strong><span>Arquitectura de Plataformas TI</span></div>
+                </div>
+                <div class="item-dato">
+                    <div class="icono-dato">📧</div>
+                    <div><strong>Email</strong><span>maricielo.carbajal@email.com</span></div>
+                </div>
+                <div class="item-dato">
+                    <div class="icono-dato">📱</div>
+                    <div><strong>Teléfono</strong><span>+51 987 654 321</span></div>
+                </div>
+                <div class="item-dato">
+                    <div class="icono-dato">💬</div>
+                    <div><strong>Idiomas</strong><span>Español nativo · Inglés intermedio</span></div>
+                </div>
+                <div class="item-dato">
+                    <div class="icono-dato">⭐</div>
+                    <div><strong>Disponibilidad</strong><span>Freelance / Remoto</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Habilidades -->
+        <div class="tarjeta" id="habilidades">
+            <h2>💻 Habilidades Técnicas</h2>
+            <div class="lista-habilidades">
+                <span class="habilidad">HTML5</span>
+                <span class="habilidad">CSS3</span>
+                <span class="habilidad">JavaScript</span>
+                <span class="habilidad">React</span>
+                <span class="habilidad">Node.js</span>
+                <span class="habilidad">MySQL</span>
+                <span class="habilidad">Git</span>
+                <span class="habilidad">Figma</span>
+                <span class="habilidad">Responsive Design</span>
+            </div>
+        </div>
+
+        <!-- Pasatiempos -->
+        <div class="tarjeta" id="pasatiempos">
+            <h2>🎯 Pasatiempos e Intereses</h2>
+            <div class="lista-pasatiempos">
+                <span class="pasatiempo">📚 Leer tecnología</span>
+                <span class="pasatiempo">🎵 Música</span>
+                <span class="pasatiempo">✍️ Writing Blog</span>
+                <span class="pasatiempo">🎮 Videojuegos</span>
+                <span class="pasatiempo">☕ Aprender cosas nuevas</span>
+                <span class="pasatiempo">🌍 Viajar</span>
+                <span class="pasatiempo">📸 Fotografía</span>
+            </div>
+        </div>
+
+        <!-- Cita inspiradora -->
+        <div class="cita">
+            <p>"La tecnología es mejor cuando une a las personas"</p>
+            <small>— Mi filosofía de trabajo</small>
+        </div>
+    </div>
+
+    <!-- Botón flotante para subir -->
+    <button id="btnTop">⬆️ Subir</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => { 
+            console.log("✨ Sitio cargado correctamente - Todos los botones funcionan");
+
+            // ========== 1. BOTÓN PARA CAMBIAR COLOR DE FONDO ==========
+            const btnCambiarColor = document.getElementById("btnCambiarColor");
+            let colores = ["#667eea", "#764ba2", "#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#1abc9c"];
+            let indiceColor = 0;
+            
+            if(btnCambiarColor) {
+                btnCambiarColor.addEventListener("click", () => {
+                    indiceColor = (indiceColor + 1) % colores.length;
+                    document.body.style.background = `linear-gradient(135deg, ${colores[indiceColor]} 0%, ${colores[(indiceColor + 1) % colores.length]} 100%)`;
+                    mostrarMensajeTemporal(`🎨 Fondo cambiado a ${colores[indiceColor]}`);
+                });
+            }
+
+            // ========== 2. BOTÓN MODO OSCURO / CLARO ==========
+            const btnModoOscuro = document.getElementById("btnModoOscuro");
+            let modoOscuro = false;
+            
+            if(btnModoOscuro) {
+                btnModoOscuro.addEventListener("click", () => {
+                    modoOscuro = !modoOscuro;
+                    if(modoOscuro) {
+                        document.body.style.background = "#1a1a2e";
+                        document.querySelectorAll(".tarjeta, .perfil, .nav-bg, .panel-botones").forEach(element => {
+                            element.style.background = "#16213e";
+                            element.style.color = "#eee";
+                        });
+                        btnModoOscuro.textContent = "☀️ Modo Claro";
+                        mostrarMensajeTemporal("🌙 Modo oscuro activado");
+                    } else {
+                        document.body.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+                        document.querySelectorAll(".tarjeta, .perfil, .nav-bg, .panel-botones").forEach(element => {
+                            element.style.background = "white";
+                            element.style.color = "#333";
+                        });
+                        btnModoOscuro.textContent = "🌙 Modo Oscuro";
+                        mostrarMensajeTemporal("☀️ Modo claro activado");
+                    }
+                });
+            }
+
+            // ========== 3. BOTÓN PARA MOSTRAR MENSAJE FLOTANTE ==========
+            const btnMostrarMensaje = document.getElementById("btnMostrarMensaje");
+            
+            if(btnMostrarMensaje) {
+                btnMostrarMensaje.addEventListener("click", () => {
+                    mostrarMensajeTemporal("✨ ¡Hola! Este es un mensaje interactivo. ¡Gracias por visitar mi sitio! ✨");
+                });
+            }
+
+            // ========== 4. BOTÓN PARA OCULTAR/MOSTRAR PASATIEMPOS ==========
+            const btnOcultarSecciones = document.getElementById("btnOcultarSecciones");
+            let pasatiemposVisible = true;
+            const seccionPasatiempos = document.getElementById("pasatiempos");
+            
+            if(btnOcultarSecciones && seccionPasatiempos) {
+                btnOcultarSecciones.addEventListener("click", () => {
+                    if(pasatiemposVisible) {
+                        seccionPasatiempos.style.display = "none";
+                        btnOcultarSecciones.textContent = "👁️ Mostrar Pasatiempos";
+                        mostrarMensajeTemporal("🙈 Sección de pasatiempos ocultada");
+                        pasatiemposVisible = false;
+                    } else {
+                        seccionPasatiempos.style.display = "block";
+                        btnOcultarSecciones.textContent = "👁️ Ocultar Pasatiempos";
+                        mostrarMensajeTemporal("👀 Sección de pasatiempos visible");
+                        pasatiemposVisible = true;
+                    }
+                });
+            }
+
+            // ========== BOTÓN PARA SUBIR (SCROLL TOP) ==========
+            const btnTop = document.getElementById("btnTop");
+            if(btnTop) {
+                window.addEventListener("scroll", () => {
+                    if(window.scrollY > 300) {
+                        btnTop.style.display = "block";
+                    } else {
+                        btnTop.style.display = "none";
+                    }
+                });
+
+                btnTop.addEventListener("click", () => {
+                    window.scrollTo({ 
+                        top: 0, 
+                        behavior: "smooth" 
+                    });
+                    mostrarMensajeTemporal("⬆️ Subiendo al inicio");
+                });
+            }
+
+            // ========== FUNCIÓN PARA MOSTRAR MENSAJES TEMPORALES ==========
+            function mostrarMensajeTemporal(texto) {
+                // Eliminar mensaje anterior si existe
+                const mensajeAnterior = document.querySelector(".mensaje-flotante");
+                if(mensajeAnterior) {
+                    mensajeAnterior.remove();
+                }
+                
+                // Crear nuevo mensaje
+                const mensaje = document.createElement("div");
+                mensaje.className = "mensaje-flotante";
+                mensaje.textContent = texto;
+                document.body.appendChild(mensaje);
+                
+                // Auto-eliminar después de 3 segundos
+                setTimeout(() => {
+                    mensaje.remove();
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

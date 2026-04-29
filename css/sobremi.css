@@ -1,0 +1,355 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+
+        /* Contenedor principal */
+        .contenedor {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Panel de botones de control */
+        .panel-botones {
+            background: rgba(196, 18, 142, 0.95);
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            box-shadow: 0 10px 30px rgba(206, 11, 60, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-control {
+            background: linear-gradient(135deg, #1683ad 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-control:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        .btn-control:active {
+            transform: translateY(0);
+        }
+
+        /* Navegación mejorada */
+        .nav-bg {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .navegacion-principal {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .navegacion-principal a {
+            color: #555;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .navegacion-principal a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        .navegacion-principal a.activo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        /* Tarjeta de perfil */
+        .perfil {
+            background: white;
+            border-radius: 30px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .perfil:hover {
+            transform: translateY(-5px);
+        }
+
+        .foto-perfil {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('../IMAGEN/perfil.png');
+            margin: 0 auto 1.5rem auto;
+           
+        }
+
+        .nombre {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .descripcion {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Tarjetas de información */
+        .tarjeta {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-5px);
+        }
+
+        .tarjeta h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 5px solid #764ba2;
+            padding-left: 1rem;
+        }
+
+        /* Grid de datos personales */
+        .grid-datos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .item-dato {
+            background: linear-gradient(135deg, #f5f7fa 0%, #f0f2f5 100%);
+            padding: 1rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .item-dato:hover {
+            transform: translateX(5px);
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+        }
+
+        .icono-dato {
+            font-size: 1.8rem;
+        }
+
+        .item-dato strong {
+            color: #764ba2;
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+        }
+
+        .item-dato span {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Habilidades */
+        .lista-habilidades {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .habilidad {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .habilidad:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        /* Pasatiempos */
+        .lista-pasatiempos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .pasatiempo {
+            background: #f0f2f5;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .pasatiempo:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Mensaje flotante */
+        .mensaje-flotante {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Cita inspiradora */
+        .cita {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .cita p {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .cita small {
+            opacity: 0.9;
+        }
+
+        /* Botón flotante mejorado */
+        #btnTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        #btnTop:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .nombre {
+                font-size: 1.6rem;
+            }
+            .foto-perfil {
+                width: 140px;
+                height: 140px;
+            }
+            .navegacion-principal a {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            .tarjeta h2 {
+                font-size: 1.4rem;
+            }
+            .cita p {
+                font-size: 1rem;
+            }
+            .habilidad, .pasatiempo {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+            .btn-control {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    

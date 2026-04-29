@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto Profesional - Maricielo Carbajal Jimenez</title>
+    <<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contacto.css">
+
+    
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="Inicio.html" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
+            <a href="SobreMi.html" class="nav-link"><i class="fas fa-user"></i> Sobre Mí</a>
+            <a href="Clientes.html" class="nav-link"><i class="fas fa-users"></i> Clientes</a>
+            <a href="Contacto.html" class="nav-link active"><i class="fas fa-envelope"></i> Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-container">
+        <h1 class="page-title">
+            <i class="fas fa-paper-plane"></i> Contáctame
+        </h1>
+
+        <div class="form-card">
+            <div class="form-header">
+                <h3><i class="fas fa-comment-dots"></i> ¿Tienes un proyecto en mente?</h3>
+                <p>Completa el formulario y te responderé lo antes posible</p>
+            </div>
+
+            <div class="form-body">
+                <form id="contactForm">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label><i class="fas fa-user"></i> Nombre completo *</label>
+                            <input type="text" id="nombre" placeholder="Ej: María González" autocomplete="off">
+                            <div class="error-message" id="error-nombre"></div>
+                        </div>
+
+                        <div class="form-field">
+                            <label><i class="fas fa-phone"></i> Teléfono *</label>
+                            <input type="tel" id="telefono" placeholder="Ej: 912345678" autocomplete="off">
+                            <div class="error-message" id="error-telefono"></div>
+                        </div>
+
+                        <div class="form-field">
+                            <label><i class="fas fa-envelope"></i> Email *</label>
+                            <input type="email" id="email" placeholder="Ej: maria@example.com" autocomplete="off">
+                            <div class="error-message" id="error-email"></div>
+                        </div>
+
+                        <div class="form-field">
+                            <label><i class="fas fa-tag"></i> ¿Cómo me conociste?</label>
+                            <select id="origen">
+                                <option value="">Selecciona una opción</option>
+                                <option value="google">Google / Buscador</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="recomendacion">Recomendación</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field full-width">
+                            <label><i class="fas fa-comment"></i> Mensaje *</label>
+                            <textarea id="mensaje" rows="5" placeholder="Cuéntame sobre tu proyecto o consulta..."></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span> / 500 caracteres
+                            </div>
+                            <div class="error-message" id="error-mensaje"></div>
+                        </div>
+                    </div>
+
+                    <!-- Sección WhatsApp -->
+                    <div class="whatsapp-section">
+                        <label class="whatsapp-checkbox">
+                            <input type="checkbox" id="whatsappCheckbox">
+                            <span><i class="fab fa-whatsapp" style="color: #25D366;"></i> Quiero contacto por WhatsApp</span>
+                            <small>(Respuesta en menos de 1 hora)</small>
+                        </label>
+                        
+                        <a href="#" id="whatsappButton" class="whatsapp-button" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Abrir conversación en WhatsApp
+                        </a>
+                    </div>
+
+                    <!-- Botón enviar -->
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i> Enviar mensaje
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de éxito -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle"></i>
+            <h4>¡Mensaje enviado!</h4>
+            <p>Gracias por contactarme. Te responderé a la brevedad posible.</p>
+            <button class="modal-button" onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Maricielo Carbajal Jimenez - Todos los derechos reservados</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // ========== SISTEMA COMPLETO DE VALIDACIÓN ==========
+        
+        // Obtener todos los elementos del DOM
+        const form = document.getElementById('contactForm');
+        const nombreInput = document.getElementById('nombre');
+        const telefonoInput = document.getElementById('telefono');
+        const emailInput = document.getElementById('email');
+        const mensajeInput = document.getElementById('mensaje');
+        const origenSelect = document.getElementById('origen');
+        const whatsappCheckbox = document.getElementById('whatsappCheckbox');
+        const whatsappButton = document.getElementById('whatsappButton');
+        const charCountSpan = document.getElementById('charCount');
+        
+        // Contador de caracteres para el mensaje
+        mensajeInput.addEventListener('input', function() {
+            const length = this.value.length;
+            charCountSpan.textContent = length;
+            
+            // Cambiar color si se acerca al límite
+            if (length > 450) {
+                charCountSpan.style.color = '#ff9800';
+            } else if (length > 480) {
+                charCountSpan.style.color = '#f44336';
+            } else {
+                charCountSpan.style.color = '#999';
+            }
+        });
+        
+        // Función para validar un campo individual (validación en tiempo real)
+        function validarCampo(campo) {
+            const id = campo.id;
+            const valor = campo.value.trim();
+            let esValido = true;
+            let mensajeError = '';
+            
+            switch(id) {
+                case 'nombre':
+                    if (valor === '') {
+                        mensajeError = '⚠️ El nombre es obligatorio';
+                        esValido = false;
+                    } else if (valor.length < 3) {
+                        mensajeError = '⚠️ El nombre debe tener al menos 3 caracteres';
+                        esValido = false;
+                    } else if (valor.length > 50) {
+                        mensajeError = '⚠️ El nombre es demasiado largo (máx 50)';
+                        esValido = false;
+                    } else if (!/^[a-zA-ZáéíóúñÑ\s]+$/.test(valor)) {
+                        mensajeError = '⚠️ Solo letras y espacios';
+                        esValido = false;
+                    }
+                    break;
+                    
+                case 'telefono':
+                    const telefonoRegex = /^[0-9]{9}$/;
+                    if (valor === '') {
+                        mensajeError = '⚠️ El teléfono es obligatorio';
+                        esValido = false;
+                    } else if (!telefonoRegex.test(valor)) {
+                        mensajeError = '⚠️ Teléfono inválido (9 dígitos, solo números)';
+                        esValido = false;
+                    }
+                    break;
+                    
+                case 'email':
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (valor === '') {
+                        mensajeError = '⚠️ El email es obligatorio';
+                        esValido = false;
+                    } else if (!emailRegex.test(valor)) {
+                        mensajeError = '⚠️ Email inválido (ejemplo@correo.com)';
+                        esValido = false;
+                    }
+                    break;
+                    
+                case 'mensaje':
+                    if (valor === '') {
+                        mensajeError = '⚠️ El mensaje es obligatorio';
+                        esValido = false;
+                    } else if (valor.length < 10) {
+                        mensajeError = '⚠️ El mensaje debe tener al menos 10 caracteres';
+                        esValido = false;
+                    } else if (valor.length > 500) {
+                        mensajeError = '⚠️ El mensaje no puede exceder 500 caracteres';
+                        esValido = false;
+                    }
+                    break;
+            }
+            
+            // Mostrar/ocultar mensaje de error
+            const errorDiv = document.getElementById(`error-${id}`);
+            if (errorDiv) {
+                if (!esValido) {
+                    errorDiv.textContent = mensajeError;
+                    errorDiv.classList.add('show');
+                    campo.classList.add('error');
+                } else {
+                    errorDiv.classList.remove('show');
+                    campo.classList.remove('error');
+                }
+            }
+            
+            return esValido;
+        }
+        
+        // Añadir validación en tiempo real para cada campo
+        nombreInput.addEventListener('blur', () => validarCampo(nombreInput));
+        nombreInput.addEventListener('input', () => validarCampo(nombreInput));
+        
+        telefonoInput.addEventListener('blur', () => validarCampo(telefonoInput));
+        telefonoInput.addEventListener('input', () => validarCampo(telefonoInput));
+        
+        emailInput.addEventListener('blur', () => validarCampo(emailInput));
+        emailInput.addEventListener('input', () => validarCampo(emailInput));
+        
+        mensajeInput.addEventListener('blur', () => validarCampo(mensajeInput));
+        mensajeInput.addEventListener('input', () => validarCampo(mensajeInput));
+        
+        // Función para validar todo el formulario antes de enviar
+        function validarFormularioCompleto() {
+            const nombreValido = validarCampo(nombreInput);
+            const telefonoValido = validarCampo(telefonoInput);
+            const emailValido = validarCampo(emailInput);
+            const mensajeValido = validarCampo(mensajeInput);
+            
+            return nombreValido && telefonoValido && emailValido && mensajeValido;
+        }
+        
+        // Función para actualizar el botón de WhatsApp (con datos del formulario)
+        function actualizarWhatsApp() {
+            if (whatsappCheckbox.checked) {
+                const nombre = nombreInput.value.trim() || "sin nombre";
+                const telefono = telefonoInput.value.trim() || "sin teléfono";
+                const email = emailInput.value.trim() || "sin email";
+                const mensaje = mensajeInput.value.trim() || "sin mensaje";
+                const origen = origenSelect.value || "no especificado";
+                
+                // Crear mensaje personalizado y formateado para WhatsApp
+                let textoWhatsApp = `Hola Maricielo, te contacto desde tu sitio web:%0A%0A`;
+                textoWhatsApp += `📝 DATOS DE CONTACTO:%0A`;
+                textoWhatsApp += `─────────────────%0A`;
+                textoWhatsApp += `👤 Nombre: ${nombre}%0A`;
+                textoWhatsApp += `📱 Teléfono: ${telefono}%0A`;
+                textoWhatsApp += `✉️ Email: ${email}%0A`;
+                textoWhatsApp += `📌 Conocido por: ${origen}%0A%0A`;
+                textoWhatsApp += `💬 MENSAJE:%0A`;
+                textoWhatsApp += `─────────────────%0A`;
+                textoWhatsApp += `${mensaje}%0A%0A`;
+                textoWhatsApp += `⏰ Fecha: ${new Date().toLocaleString('es-ES')}%0A`;
+                textoWhatsApp += `🌐 Enviado desde: Formulario Web`;
+                
+                const whatsappLink = `https://wa.me/51935764032?text=${textoWhatsApp}`;
+                whatsappButton.href = whatsappLink;
+                whatsappButton.classList.add('show');
+            } else {
+                whatsappButton.classList.remove('show');
+            }
+        }
+        
+        // Escuchar cambios en el checkbox y en los campos del formulario
+        whatsappCheckbox.addEventListener('change', actualizarWhatsApp);
+        nombreInput.addEventListener('input', actualizarWhatsApp);
+        telefonoInput.addEventListener('input', actualizarWhatsApp);
+        emailInput.addEventListener('input', actualizarWhatsApp);
+        mensajeInput.addEventListener('input', actualizarWhatsApp);
+        origenSelect.addEventListener('change', actualizarWhatsApp);
+        
+        // Función para mostrar el modal de éxito
+        function mostrarModal() {
+            const modal = document.getElementById('successModal');
+            modal.style.display = 'flex';
+            
+            // Cerrar modal después de 3 segundos automáticamente
+            setTimeout(() => {
+                cerrarModal();
+            }, 3000);
+        }
+        
+        function cerrarModal() {
+            const modal = document.getElementById('successModal');
+            modal.style.display = 'none';
+        }
+        
+        // Función para limpiar el formulario después de enviar
+        function limpiarFormulario() {
+            form.reset();
+            whatsappCheckbox.checked = false;
+            whatsappButton.classList.remove('show');
+            charCountSpan.textContent = '0';
+            
+            // Limpiar clases de error
+            const allErrors = document.querySelectorAll('.error-message');
+            allErrors.forEach(error => error.classList.remove('show'));
+            
+            const allInputs = document.querySelectorAll('input, textarea');
+            allInputs.forEach(input => input.classList.remove('error'));
+        }
+        
+        // Manejar el envío del formulario
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validarFormularioCompleto()) {
+                // Recopilar datos para enviar (simulación)
+                const datosFormulario = {
+                    nombre: nombreInput.value.trim(),
+                    telefono: telefonoInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    mensaje: mensajeInput.value.trim(),
+                    origen: origenSelect.value,
+                    whatsapp: whatsappCheckbox.checked,
+                    fecha: new Date().toISOString()
+                };
+                
+                console.log('Datos enviados:', datosFormulario);
+                
+                // Mostrar mensaje de éxito
+                mostrarModal();
+                
+                // Limpiar formulario después de 2 segundos
+                setTimeout(() => {
+                    limpiarFormulario();
+                }, 2000);
+                
+                // Aquí normalmente enviarías los datos a un servidor con fetch()
+                // Ejemplo:
+                // fetch('tu-api/enviar', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(datosFormulario)
+                // });
+            } else {
+                // Scroll hasta el primer error
+                const primerError = document.querySelector('.error-message.show');
+                if (primerError) {
+                    primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+        
+        // Efecto de bienvenida en consola
+        console.log('%c✨ Formulario de contacto cargado ✨', 'color: #d60f51; font-size: 16px; font-weight: bold;');
+        console.log('%cMaricielo Carbajal - Contacto profesional', 'color: #1206b4; font-size: 12px;');
+    </script>
+</body>
+</html>
