@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     // Mostrar frases motivadoras al hacer clic - No funciona en botones ni casillas
 const frases = [
-    "✨ Tú puedes lograrlo",
+    "✨ Aplicasión Web",
     "💪 Sigue adelante",
     "🌟 Eres increíble",
     "🎯 No te rindas",
@@ -27,17 +27,4 @@ document.body.addEventListener("click", (e) => {
         alert(frase);
     }
 });
-
-// Cronómetro simple
-let s = 0;
-const reloj = document.createElement("div");
-reloj.style.cssText = "position:fixed; top:10px; left:10px; background:red; color:white; padding:5px;";
-reloj.textContent = "0s";
-document.body.appendChild(reloj);
-
-setInterval(() => {
-    s++;
-    reloj.textContent = s + "s";
-}, 1000);
-
 });

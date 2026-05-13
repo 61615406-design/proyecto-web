@@ -4,16 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Mi - Maricielo Carbajal Jimenez</title>
-     <<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/sobremi.css">
     
+    <style>
+        /* Estilos adicionales para el formulario */
+        .formulario-contacto {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .formulario-contacto h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .grupo-form {
+            margin-bottom: 20px;
+        }
+        
+        .grupo-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .grupo-form input,
+        .grupo-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .grupo-form input:focus,
+        .grupo-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn-enviar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn-enviar:hover {
+            opacity: 0.9;
+        }
+        
+        .mensaje-exito {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .mensaje-error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div class="contenedor">
         <!-- Panel de botones de control (NUEVAS FUNCIONALIDADES) -->
         <div class="panel-botones">
             <button class="btn-control" id="btnCambiarColor">🎨 Cambiar Fondo</button>
-            <button class="btn-control" id="btnModoOscuro">🌙 Modo Oscuro</button>
+            <button class="btn-control" id="btnModoOscuro">🌙 Modo claro</button>
             <button class="btn-control" id="btnMostrarMensaje">💬 Mostrar Mensaje</button>
             <button class="btn-control" id="btnOcultarSecciones">👁️ Ocultar Pasatiempos</button>
         </div>
@@ -111,6 +184,42 @@
             </div>
         </div>
 
+        <!-- FORMULARIO AGREGADO -->
+        <div class="formulario-contacto">
+            <h2>📝 Contáctame</h2>
+            <div id="mensajeExito" class="mensaje-exito">✅ ¡Mensaje enviado correctamente!</div>
+            <div id="mensajeError" class="mensaje-error">❌ Error al enviar el mensaje</div>
+            
+            <form id="contactoForm" method="POST" action="guardar_mensaje.php">
+                <div class="grupo-form">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="grupo-form">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="grupo-form">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono">
+                </div>
+                
+                <div class="grupo-form">
+                    <label for="asunto">Asunto:</label>
+                    <input type="text" id="asunto" name="asunto" required>
+                </div>
+                
+                <div class="grupo-form">
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+            </form>
+        </div>
+
         <!-- Cita inspiradora -->
         <div class="cita">
             <p>"La tecnología es mejor cuando une a las personas"</p>
@@ -147,7 +256,7 @@
                     modoOscuro = !modoOscuro;
                     if(modoOscuro) {
                         document.body.style.background = "#1a1a2e";
-                        document.querySelectorAll(".tarjeta, .perfil, .nav-bg, .panel-botones").forEach(element => {
+                        document.querySelectorAll(".tarjeta, .perfil, .nav-bg, .panel-botones, .formulario-contacto").forEach(element => {
                             element.style.background = "#16213e";
                             element.style.color = "#eee";
                         });
@@ -155,7 +264,7 @@
                         mostrarMensajeTemporal("🌙 Modo oscuro activado");
                     } else {
                         document.body.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
-                        document.querySelectorAll(".tarjeta, .perfil, .nav-bg, .panel-botones").forEach(element => {
+                        document.querySelectorAll(".tarjeta, .perfil, .nav-bg, .panel-botones, .formulario-contacto").forEach(element => {
                             element.style.background = "white";
                             element.style.color = "#333";
                         });
@@ -195,6 +304,51 @@
                 });
             }
 
+            // ========== MANEJO DEL FORMULARIO ==========
+            const formulario = document.getElementById("contactoForm");
+            const mensajeExito = document.getElementById("mensajeExito");
+            const mensajeError = document.getElementById("mensajeError");
+            
+            if(formulario) {
+                formulario.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    
+                    mensajeExito.style.display = "none";
+                    mensajeError.style.display = "none";
+                    
+                    const formData = new FormData(formulario);
+                    
+                    try {
+                        const response = await fetch("guardar_mensaje.php", {
+                            method: "POST",
+                            body: formData
+                        });
+                        
+                        const resultado = await response.text();
+                        
+                        if(resultado.includes("success")) {
+                            mensajeExito.style.display = "block";
+                            formulario.reset();
+                            mostrarMensajeTemporal("✅ Mensaje enviado con éxito");
+                            
+                            setTimeout(() => {
+                                mensajeExito.style.display = "none";
+                            }, 5000);
+                        } else {
+                            mensajeError.style.display = "block";
+                            mostrarMensajeTemporal("❌ Error al enviar");
+                            
+                            setTimeout(() => {
+                                mensajeError.style.display = "none";
+                            }, 5000);
+                        }
+                    } catch(error) {
+                        mensajeError.style.display = "block";
+                        mostrarMensajeTemporal("❌ Error de conexión");
+                    }
+                });
+            }
+
             // ========== BOTÓN PARA SUBIR (SCROLL TOP) ==========
             const btnTop = document.getElementById("btnTop");
             if(btnTop) {
@@ -217,19 +371,16 @@
 
             // ========== FUNCIÓN PARA MOSTRAR MENSAJES TEMPORALES ==========
             function mostrarMensajeTemporal(texto) {
-                // Eliminar mensaje anterior si existe
                 const mensajeAnterior = document.querySelector(".mensaje-flotante");
                 if(mensajeAnterior) {
                     mensajeAnterior.remove();
                 }
                 
-                // Crear nuevo mensaje
                 const mensaje = document.createElement("div");
                 mensaje.className = "mensaje-flotante";
                 mensaje.textContent = texto;
                 document.body.appendChild(mensaje);
                 
-                // Auto-eliminar después de 3 segundos
                 setTimeout(() => {
                     mensaje.remove();
                 }, 3000);
